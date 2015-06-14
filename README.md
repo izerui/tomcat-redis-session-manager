@@ -25,7 +25,6 @@
 1. 修改nginx conf配置文件加入
 
 		upstream tomcat {
-		    ip_hash;
 		    server 200.10.10.67:8110;
 		    server 200.10.10.67:8120;
 		    server 200.10.10.44:8110;
