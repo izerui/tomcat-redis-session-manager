@@ -16,6 +16,7 @@
 
 * java1.7
 * tomcat7
+* redis2.8
 
 
 
@@ -23,9 +24,9 @@
 
 1. 添加redis session集群依赖的jar包到 TOMCAT_BASE/lib 目录下
 
-	* tomcat-redis-session-manager-2.0.0.jar
-	* jedis-2.5.2.jar
-	* commons-pool2-2.2.jar
+	* <a href="https://github.com/izerui/tomcat-redis-session-manager/blob/master/jar/tomcat-redis-session-manager-2.0.0.jar?raw=true" target="_blank">tomcat-redis-session-manager-2.0.0.jar</a>
+	* <a href="https://github.com/izerui/tomcat-redis-session-manager/blob/master/jar/jedis-2.5.2.jar?raw=true" target="_blank">jedis-2.5.2.jar</a>
+	* <a href="https://github.com/izerui/tomcat-redis-session-manager/blob/master/jar/commons-pool2-2.2.jar?raw=true" target="_blank">commons-pool2-2.2.jar</a>
 
 
 2. 修改 TOMCAT_BASE/conf 目录下的 context.xml 文件
@@ -45,13 +46,15 @@
 	*	**host** 						redis服务器地址
 	*	**port** 						redis服务器的端口号
 	*	**database** 					要使用的redis数据库索引
-	*	**maxInactiveInterval** 		session最大空闲超时时间，如果不填则使用tomcat的超时时长，一般tomcat默认为1800 半个小时
-	*	**sessionPersistPolicies**		session保存策略，可选
+	*	**maxInactiveInterval** 		session最大空闲超时时间，如果不填则使用tomcat的超时时长，一般tomcat默认为1800 即半个小时
+	*	**sessionPersistPolicies**		session保存策略，除了默认的策略还可以选择的策略有：
+			
+			[SAVE_ON_CHANGE]:每次 session.setAttribute() 、 session.removeAttribute() 触发都会保存. 
+				注意：此功能无法检测已经存在redis的特定属性的变化，
+				注意：这种策略会略微降低会话的性能，任何改变都会保存到redis中.
 
-			[SAVE_ON_CHANGE]: every time session.setAttribute() or session.removeAttribute() is called the session will be saved. Note: This feature cannot detect changes made to objects already stored in a specific session attribute. Tradeoffs: This option will degrade performance slightly as any change to the session will save the session synchronously to Redis.
-
-			[ALWAYS_SAVE_AFTER_REQUEST]: force saving after every request, regardless of whether or not the manager has detected changes to the session. This option is particularly useful if you make changes to objects already stored in a specific session attribute. Tradeoff: This option make actually increase the liklihood of race conditions if not all of your requests change the session.
-	* **sentinelMaster**		redis集群主节点名称
-	* **sentinels**				redis集群列表配置
+			[ALWAYS_SAVE_AFTER_REQUEST]: 每一个request请求后都强制保存，无论是否检测到变化.对于更改一个已经存储在redis中的会话属性，该选项特别有用. 权衡: 如果不是所有的request请求都要求改变会话属性的话不推荐使用，因为会增加并发竞争的情况。
+	* **sentinelMaster**		redis集群主节点名称（Redis集群是以分片(Sharding)加主从的方式搭建，满足可扩展性的要求）
+	* **sentinels**				redis集群列表配置(类似zookeeper，通过多个Sentinel来提高系统的可用性)
 
 3. 重启tomcat，session存储即可生效
