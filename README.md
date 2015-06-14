@@ -20,7 +20,22 @@
 
 
 
-## 步骤
+## nginx 负载均衡配置
+
+1. 修改nginx conf配置文件加入
+
+		upstream tomcat {
+		    ip_hash;
+		    server 200.10.10.67:8110;
+		    server 200.10.10.67:8120;
+		    server 200.10.10.44:8110;
+		    server 200.10.10.66:8110;
+		}
+
+2. 配置 相应的server或者 location地址到 http://tomcat
+
+
+## tomcat session共享配置步骤
 
 1. 添加redis session集群依赖的jar包到 TOMCAT_BASE/lib 目录下
 
