@@ -31,15 +31,15 @@
 
 2. 修改 TOMCAT_BASE/conf 目录下的 context.xml 文件
 
-		<Valve className="com.orangefunction.tomcat.redissessions.RedisSessionHandlerValve" />
-		<Manager className="com.orangefunction.tomcat.redissessions.RedisSessionManager"
-         host="localhost"
-         port="6379"
-         database="0"
-         maxInactiveInterval="60"
-         sessionPersistPolicies="PERSIST_POLICY_1,PERSIST_POLICY_2,.."
-         sentinelMaster="SentinelMasterName"
-         sentinels="sentinel-host-1:port,sentinel-host-2:port,.."/>
+			<Valve className="com.orangefunction.tomcat.redissessions.RedisSessionHandlerValve" />
+			<Manager className="com.orangefunction.tomcat.redissessions.RedisSessionManager"
+	         host="localhost"
+	         port="6379"
+	         database="0"
+	         maxInactiveInterval="60"
+	         sessionPersistPolicies="PERSIST_POLICY_1,PERSIST_POLICY_2,.."
+	         sentinelMaster="SentinelMasterName"
+	         sentinels="sentinel-host-1:port,sentinel-host-2:port,.."/>
 
 	属性解释：
 
