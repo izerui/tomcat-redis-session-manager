@@ -51,7 +51,7 @@
 			
 			[SAVE_ON_CHANGE]:每次 session.setAttribute() 、 session.removeAttribute() 触发都会保存. 
 				注意：此功能无法检测已经存在redis的特定属性的变化，
-				注意：这种策略会略微降低会话的性能，任何改变都会保存到redis中.
+				权衡：这种策略会略微降低会话的性能，任何改变都会保存到redis中.
 
 			[ALWAYS_SAVE_AFTER_REQUEST]: 每一个request请求后都强制保存，无论是否检测到变化.
 				注意：对于更改一个已经存储在redis中的会话属性，该选项特别有用. 
