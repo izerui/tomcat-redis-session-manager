@@ -53,7 +53,9 @@
 				注意：此功能无法检测已经存在redis的特定属性的变化，
 				注意：这种策略会略微降低会话的性能，任何改变都会保存到redis中.
 
-			[ALWAYS_SAVE_AFTER_REQUEST]: 每一个request请求后都强制保存，无论是否检测到变化.对于更改一个已经存储在redis中的会话属性，该选项特别有用. 权衡: 如果不是所有的request请求都要求改变会话属性的话不推荐使用，因为会增加并发竞争的情况。
+			[ALWAYS_SAVE_AFTER_REQUEST]: 每一个request请求后都强制保存，无论是否检测到变化.
+				注意：对于更改一个已经存储在redis中的会话属性，该选项特别有用. 
+				权衡：如果不是所有的request请求都要求改变会话属性的话不推荐使用，因为会增加并发竞争的情况。
 	* **sentinelMaster**		redis集群主节点名称（Redis集群是以分片(Sharding)加主从的方式搭建，满足可扩展性的要求）
 	* **sentinels**				redis集群列表配置(类似zookeeper，通过多个Sentinel来提高系统的可用性)
 
