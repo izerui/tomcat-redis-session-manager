@@ -72,5 +72,23 @@
 				权衡：如果不是所有的request请求都要求改变会话属性的话不推荐使用，因为会增加并发竞争的情况。
 	* **sentinelMaster**		redis集群主节点名称（Redis集群是以分片(Sharding)加主从的方式搭建，满足可扩展性的要求）
 	* **sentinels**				redis集群列表配置(类似zookeeper，通过多个Sentinel来提高系统的可用性)
+	* **connectionPoolMaxTotal**	
+	* **connectionPoolMaxIdle**	jedis最大能够保持idel状态的连接数
+	* **connectionPoolMinIdle**	与connectionPoolMaxIdle相反
+	* **maxWaitMillis**	jedis池没有对象返回时，最大等待时间
+	* **minEvictableIdleTimeMillis**
+	* **softMinEvictableIdleTimeMillis**
+	* **numTestsPerEvictionRun**
+	* **testOnCreate**
+	* **testOnBorrow**	jedis调用borrowObject方法时，是否进行有效检查
+	* **testOnReturn**	jedis调用returnObject方法时，是否进行有效检查
+	* **testWhileIdle**
+	* **timeBetweenEvictionRunsMillis**
+	* **evictionPolicyClassName**
+	* **blockWhenExhausted**
+	* **jmxEnabled**
+	* **jmxNameBase**
+	* **jmxNamePrefix**
+	* ****
 
 3. 重启tomcat，session存储即可生效
